@@ -1,10 +1,28 @@
 import pandas as pd
+import math
+from math import fsum
 import matplotlib.pyplot as plt
 from operator import itemgetter
 import numpy as np
 df = pd.read_csv("avocado.csv")
 df.head()
 
+#проверка столбца Total Bags
+df["check_sum"] = df["Small Bags"]+df["Large Bags"]+df["XLarge Bags"]
+
+sum2015 = df.loc[df['year'] == 2015, 'check_sum'].sum()
+sum2016 = df.loc[df['year'] == 2016, 'check_sum'].sum()
+sum2017 = df.loc[df['year'] == 2017, 'check_sum'].sum()
+all_sum = [sum2015, sum2016, sum2017]
+sum2015 = df.loc[df['year'] == 2015, 'Total Bags'].sum()
+sum2016 = df.loc[df['year'] == 2016, 'Total Bags'].sum()
+sum2017 = df.loc[df['year'] == 2017, 'Total Bags'].sum()
+all_summ = [sum2015, sum2016, sum2017]
+plt.title('Total avocado volume each year', fontsize=15)
+plt.plot((2015, 2016, 2017), all_summ)
+plt.plot((2015, 2016, 2017), all_sum)
+plt.xticks([2015, 2016, 2017])
+plt.show()
 
 #обработка типа авокадо
 df_norm = df.copy()
@@ -56,3 +74,8 @@ print(df_norm["Small Bags"].unique())
 df_norm["Large Bags"] = round(df_norm["Large Bags"])
 df_norm.head()
 print(df_norm["Large Bags"].unique())
+
+
+print(df[df['AveragePrice'].isnull()])
+
+
