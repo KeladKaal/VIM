@@ -20,7 +20,7 @@ for i in range (18249):
             abc.append(key)
 
 
-
+df.sort_values(by='Date')
 #print(str(df["Date"][7][5])+str(df["Date"][7][6]))
 
 
